@@ -1,4 +1,4 @@
-import { DeleteForeverOutlined } from "@mui/icons-material";
+import { DeleteOutlineRounded } from "@mui/icons-material";
 import { Task } from "../../api/types";
 import "./List.sass";
 
@@ -19,7 +19,7 @@ export default function List({ tasks, setTasks }: ListProps) {
                     <h4>{task.id}. {task.title}</h4>
 
                     <button onClick={() => deleteTask(task.id)}>
-                        <DeleteForeverOutlined />
+                    <DeleteOutlineRounded sx={{ color: '#607D8B' }} />
                     </button>
                 </div>
             ))}
