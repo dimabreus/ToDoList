@@ -1,5 +1,5 @@
-import { AddRounded } from "@mui/icons-material"
-import "./AddTask.sass"
+import { AddRounded } from "@mui/icons-material";
+import "./AddTask.sass";
 import { Task } from "../../api/types";
 import { useState } from "react";
 
@@ -12,8 +12,18 @@ export default function AddTask({ tasks, setTasks }: AddTaskProps) {
     const [value, setValue] = useState('');
 
     function addTask() {
-        setTasks([...tasks, new Task(value)]);
+        if (value.trim()) {
+            setTasks([...tasks, new Task(value)]);
+            setValue('');
+        }
     }
+
+    function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === 'Enter') {
+            addTask();
+        }
+    }
+
     return (
         <div className="addTask">
             <div className="input">
@@ -22,11 +32,12 @@ export default function AddTask({ tasks, setTasks }: AddTaskProps) {
                     placeholder="Make something..."
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    onKeyDown={handleKeyPress}
                 />
                 <button onClick={addTask}>
                     <AddRounded />
                 </button>
             </div>
         </div>
-    )
+    );
 }
